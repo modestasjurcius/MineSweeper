@@ -1,0 +1,17 @@
+{
+    "Levels": [
+        {
+            "LevelName": "Easy",
+            "MinesCount": 50
+        },
+        {
+            "LevelName": "Medium",
+            "MinesCount": 100
+        },
+        {
+            "LevelName": "Hard",
+            "MinesCount": 150
+        }
+    ],
+    "MinesRowsCount": 10
+}
