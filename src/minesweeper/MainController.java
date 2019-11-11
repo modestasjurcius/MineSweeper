@@ -8,9 +8,6 @@ package minesweeper;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -43,6 +41,8 @@ public class MainController implements Initializable
     private AnchorPane mineFieldHolder; 
     @FXML
     private Button backButton;
+    @FXML
+    private Label gameEndTextLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -50,6 +50,9 @@ public class MainController implements Initializable
         this.levels = new ArrayList<SLevel>();
         
         parseConfig(this.levelConfigFile);
+        
+        this.gameEndTextLabel.setVisible(false);
+        this.mineFieldHolder.setVisible(false);
         
         setupLevels();
     }    
@@ -116,6 +119,9 @@ public class MainController implements Initializable
         
         this.backButton.setVisible(false);
         this.mineFieldHolder.setVisible(false);
+        this.gameEndTextLabel.setVisible(false);
+        
+        this.mineField.cleanUpMineField();
     }
     
     private SLevel getCurrentLevel()
@@ -126,5 +132,26 @@ public class MainController implements Initializable
     @FXML
     private void onPressed(MouseEvent event)
     {
+        this.mineField.onPressed(event.getX(), event.getY());
+        if(this.mineField.isGameFinished())
+        {
+            finishGame(this.mineField.isVictory());
+        }
+    }
+    
+    public void finishGame(boolean isWin)
+    {
+        if(isWin)
+        {
+            this.gameEndTextLabel.setText("Victory !");
+            this.gameEndTextLabel.setTextFill(Color.GREEN);
+        }
+        else
+        {
+            this.gameEndTextLabel.setText("Game Over !");
+            this.gameEndTextLabel.setTextFill(Color.RED);
+        }
+        
+        this.gameEndTextLabel.setVisible(true);
     }
 }
