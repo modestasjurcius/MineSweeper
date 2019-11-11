@@ -11,6 +11,8 @@ public class SLevel
     public int fieldsCount;
     public int minesCount;
     public int columnsCount;
+    public int rowsCount;
+    public int emptyFieldsCount;
     
     public SLevel()
     {}
@@ -21,5 +23,7 @@ public class SLevel
         this.fieldsCount = fieldsCount;
         this.minesCount = minesCount;
         this.columnsCount = columnsCount;
+        this.rowsCount = this.fieldsCount / this.columnsCount;
+        this.emptyFieldsCount = this.fieldsCount - this.minesCount;
     }
 }
