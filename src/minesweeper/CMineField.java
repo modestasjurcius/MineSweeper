@@ -16,29 +16,29 @@ public class CMineField
     
     private ArrayList<CMine> mines;
     
-    private int minesCount;
+    private SLevel currentLevel;
     
-    public CMineField(AnchorPane mineFieldHolder, int minesCount)
+    
+    public CMineField(AnchorPane mineFieldHolder, SLevel level)
     {
         this.mineFieldHolder = mineFieldHolder;
-        this.minesCount = minesCount;
+        this.currentLevel = level;
         
         setupMineField();
     }
     
     private void setupMineField()
     {
-        int rows = 10;
-        int columns = minesCount / rows;
+        int rows = this.currentLevel.fieldsCount / this.currentLevel.columnsCount;
         
-        double width = this.mineFieldHolder.getWidth() / rows;
-        double height = this.mineFieldHolder.getHeight() / columns;
+        double width = this.mineFieldHolder.getWidth() / this.currentLevel.columnsCount;
+        double height = this.mineFieldHolder.getHeight() / rows;
         
         Rectangle rect = null;
         
-        for(int i = 0; i < columns; ++i)
+        for(int i = 0; i < rows; ++i)
         {
-            for(int j = 0; j < rows; ++j)
+            for(int j = 0; j < this.currentLevel.columnsCount; ++j)
             {
                 rect = new Rectangle(width*j, height*i, width, height);
                 
