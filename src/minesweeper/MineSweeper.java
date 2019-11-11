@@ -23,14 +23,13 @@ public class MineSweeper extends Application
     {
         try
         {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        }
-        catch(Exception ex)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception ex)
         {
             ex.printStackTrace();
         }
