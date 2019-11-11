@@ -2,16 +2,21 @@
     "Levels": [
         {
             "LevelName": "Easy",
-            "MinesCount": 50
+            "FieldsCount": 50,
+            "MinesCount": 10,
+            "MinesColumnsCount": 10
         },
         {
             "LevelName": "Medium",
-            "MinesCount": 100
+            "FieldsCount": 100,
+            "MinesCount": 20,
+            "MinesColumnsCount": 10
         },
         {
             "LevelName": "Hard",
-            "MinesCount": 150
+            "FieldsCount": 150,
+            "MinesCount": 30,
+            "MinesColumnsCount": 10
         }
-    ],
-    "MinesRowsCount": 10
+    ]
 }
