@@ -18,10 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Pair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -31,7 +29,7 @@ public class MainController implements Initializable
 {
     private String levelConfigFile = "LevelConfig.json";
     
-    private HashMap<String, Integer> levelsMap;
+    private ArrayList<SLevel> levels;
     
     private CMineField mineField;
     
@@ -49,7 +47,7 @@ public class MainController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        this.levelsMap = new HashMap();
+        this.levels = new ArrayList<SLevel>();
         
         parseConfig(this.levelConfigFile);
         
@@ -65,9 +63,8 @@ public class MainController implements Initializable
         
         this.backButton.setVisible(true);
         this.mineFieldHolder.setVisible(true);
-              
-        int minesCount = this.levelsMap.get(this.levelSelectComboBox.getSelectionModel().getSelectedItem());
-        this.mineField = new CMineField(this.mineFieldHolder, minesCount);
+        
+        this.mineField = new CMineField(this.mineFieldHolder, getCurrentLevel());
     }
     
     private void parseConfig(String configPath)
@@ -87,8 +84,11 @@ public class MainController implements Initializable
                
                String levelName = (String) level.get("LevelName");
                int minesCountInLevel =  ((Long)level.get("MinesCount")).intValue();
+               int fieldsCountInLevel = ((Long)level.get("FieldsCount")).intValue();
+               int columnsCountInLevel = ((Long)level.get("MinesColumnsCount")).intValue();
+               SLevel sLevel = new SLevel(levelName, fieldsCountInLevel, minesCountInLevel, columnsCountInLevel);
                
-               this.levelsMap.put(levelName, minesCountInLevel);
+               this.levels.add(sLevel);
             }          
         }
         catch (Exception ex)
@@ -99,9 +99,9 @@ public class MainController implements Initializable
     
     private void setupLevels()
     {
-        for(String levelName : this.levelsMap.keySet())
+        for(SLevel level : this.levels)
         {
-            this.levelSelectComboBox.getItems().add(levelName);
+            this.levelSelectComboBox.getItems().add(level.levelName);
         }
         
         this.levelSelectComboBox.getSelectionModel().selectFirst();
@@ -116,5 +116,15 @@ public class MainController implements Initializable
         
         this.backButton.setVisible(false);
         this.mineFieldHolder.setVisible(false);
+    }
+    
+    private SLevel getCurrentLevel()
+    { 
+        return this.levels.get(this.levelSelectComboBox.getSelectionModel().getSelectedIndex());
+    }
+
+    @FXML
+    private void onPressed(MouseEvent event)
+    {
     }
 }
