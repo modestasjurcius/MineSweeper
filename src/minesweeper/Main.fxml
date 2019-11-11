@@ -9,6 +9,11 @@
 <AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minesweeper.MainController">
    <children>
       <AnchorPane fx:id="mineFieldHolder" layoutX="40.0" layoutY="91.0" onMousePressed="#onPressed" prefHeight="285.0" prefWidth="520.0" visible="false" />
+      <Label fx:id="gameEndTextLabel" alignment="CENTER" layoutX="138.0" layoutY="183.0" prefHeight="84.0" prefWidth="324.0" style="-fx-border-color: GOLD; -fx-border-width: 2; -fx-background-color: GREY;" text="&lt;game end text&gt;">
+         <font>
+            <Font name="System Bold" size="38.0" />
+         </font>
+      </Label>
       <Button fx:id="startGameButton" layoutX="170.0" layoutY="321.0" mnemonicParsing="false" onAction="#onStartNewGame" prefHeight="55.0" prefWidth="261.0" text="Start New Game" />
       <Label layoutX="178.0" layoutY="14.0" prefHeight="38.0" prefWidth="247.0" text="Mine Sweeper" textFill="#fc0000">
          <font>
